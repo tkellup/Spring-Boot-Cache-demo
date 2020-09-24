@@ -1,49 +1,48 @@
 package com.example.springboot.cruddemo.dao;
 
-import com.example.springboot.cruddemo.entity.Employee;
+import model.WeatherObservation;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
+import repo.WeatherObservationRepository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class EmployeeDAOImpl implements EmployeeDAO {
+public class WeatherObservationDAOImpl implements WeatherObservationRepository {
 
-    private EntityManager em;
+    private final EntityManager em;
 
-    public EmployeeDAOImpl(EntityManager em) {
+    public WeatherObservationDAOImpl(EntityManager em) {
         this.em = em;
     }
 
     @Override
-    public List<Employee> findAll() {
+    public List<WeatherObservation> findAll() {
         //get the current hibernate session
         Session session = em.unwrap(Session.class);
         //create a query
-        String sql = "Select e from Employee e";
-        Query<Employee> query = session.createQuery(sql, Employee.class);
+        String sql = "Select e from WeatherObservation e";
+        Query<WeatherObservation> query = session.createQuery(sql, WeatherObservation.class);
         //execute query and return result list
-        List<Employee> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     @Override
-    public Employee findById(int id) {
+    public WeatherObservation findById(int id) {
         //get the current hibernate session
         Session session = em.unwrap(Session.class);
         //get Employee
-        Employee e = session.get(Employee.class, id);
-        return e;
+        return session.get(WeatherObservation.class, id);
     }
 
     @Override
-    public void save(Employee e) {
+    public void save(WeatherObservation e) {
         //get the current hibernate session
         Session session = em.unwrap(Session.class);
 
-        //save Employee
+        //save object
         session.saveOrUpdate(e);
     }
 
@@ -52,10 +51,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         //get the current hibernate session
         Session session = em.unwrap(Session.class);
 
-        //delete Employee with primary key
-        Query query = session.createQuery("delete from Employee e where e.id = :employeeId");
-        query.setParameter("employeeId",id);
-
+        //delete object with primary key
+        Query<WeatherObservation> query = session.createQuery("delete from WeatherObservation e where e.id = :weatherObservationId");
+        query.setParameter("weatherObservationId", id);
         query.executeUpdate();
     }
 }
