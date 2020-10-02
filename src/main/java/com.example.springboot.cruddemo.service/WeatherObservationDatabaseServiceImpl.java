@@ -19,6 +19,11 @@ public class WeatherObservationDatabaseServiceImpl implements WeatherObservation
     }
 
     @Override
+    public List<Object> findAllObjects() {
+        return null;
+    }
+
+    @Override
     @Transactional
     public List<WeatherObservation> findAll() {
         return weatherObservationRepository.findAll();

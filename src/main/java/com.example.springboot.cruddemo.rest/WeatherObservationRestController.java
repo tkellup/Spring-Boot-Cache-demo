@@ -1,6 +1,7 @@
 package com.example.springboot.cruddemo.rest;
 
 import com.example.springboot.cruddemo.service.WeatherObservationService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import model.WeatherObservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +19,12 @@ public class WeatherObservationRestController {
     }
 
     @GetMapping("/weatherObservations")
-    public List<WeatherObservation> getAllWeatherObservation() {
+    public List<WeatherObservation> getAllWeatherObservation() throws JsonProcessingException, InterruptedException {
         return weatherObservationService.findAll();
     }
 
     @GetMapping("/weatherObservations/{weatherObservationId}")
-    public WeatherObservation getWeatherObservastions(@PathVariable("weatherObservationId") int id) {
+    public WeatherObservation getWeatherObservations(@PathVariable("weatherObservationId") int id) {
         WeatherObservation weatherObservation = weatherObservationService.findById(id);
 
         if (weatherObservation == null) {

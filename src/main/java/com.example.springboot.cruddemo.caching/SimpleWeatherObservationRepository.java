@@ -2,11 +2,13 @@ package com.example.springboot.cruddemo.caching;
 
 import model.WeatherObservation;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import repo.WeatherObservationRepository;
 
 import java.util.List;
 
+@Primary
 @Component
 public class SimpleWeatherObservationRepository implements WeatherObservationRepository {
     @Override

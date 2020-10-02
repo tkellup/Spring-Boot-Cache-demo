@@ -1,30 +1,35 @@
 package model;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class WeatherObservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @JsonProperty("id")
     private int id;
 
-    @Column
+    @JsonProperty("longitude")
     private long longitude;
 
-    @Column
+    @JsonProperty("latitude")
     private long latitude;
 
-    @Column
+    @JsonProperty("windSpeed")
     private long windSpeed;
 
-    @Column
+    @JsonProperty("windDirection")
     private long windDirection;
 
-    @Column
+    @JsonProperty("airTemperature")
     private float airTemperature;
 
-    @Column
+    @JsonProperty("eaLevelPressure")
     private float seaLevelPressure;
 
     public WeatherObservation() {
